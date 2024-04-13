@@ -13,9 +13,9 @@ sleep 5
 sudo sed -i "s/localhost/*/" /etc/postgresql/13/main/postgresql.conf
 sleep 5
 sudo sed -i '96 s/127.0.0.1\/32/0.0.0.0\/0/g' /etc/postgresql/13/main/pg_hba.conf
-DB_NAME=paycash
-DB_USER=paycash
-DB_USER_PASS=paycash
+DB_NAME=postgresmain
+DB_USER=postgres123
+DB_USER_PASS=postgres123
 sudo su - postgres <<EOF
 createdb  $DB_NAME;
 psql -c "CREATE USER $DB_USER WITH PASSWORD '$DB_USER_PASS';"
