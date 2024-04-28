@@ -1,0 +1,3 @@
+Createion of Azure Service Principal Command
+
+az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/"subcsription-id"
