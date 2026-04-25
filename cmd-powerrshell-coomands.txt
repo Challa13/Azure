@@ -1,0 +1,15 @@
+Below is a detailed comparison of 50 commonly used commands in CMD (Command Prompt) and PowerShell, organized by categories: file management, system info, network, text processing, disks, processes, and more.
+1. File and Directory Management
+
+
+2. System Information & Maintenance
+
+3. Networking
+
+4. Disk and Storage
+
+5. File Content & Text Processing
+
+6. Scripting & Automation
+
+7. Security & Permissions
