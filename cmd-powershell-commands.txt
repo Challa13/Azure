@@ -1,0 +1,128 @@
+CMD vs PowerShell Command Comparison with DevOps Examples
+
+================================================== FILE & DIRECTORY PERATIONS ==================================================
+1.List files CMD: dir PowerShell: Get-ChildItem or ls
+
+2.Change directory CMD: cd PowerShell: Set-Location or cd
+
+3.Create directory CMD: mkdir PowerShell: New-Item -ItemType Directory
+
+4.Delete file CMD: del file.txt PowerShell: Remove-Item file.txt
+
+5.Delete folder CMD: rmdir folder PowerShell: Remove-Item folder -Recurse
+
+6.Copy file CMD: copy a.txt b.txt PowerShell: Copy-Item a.txt b.txt
+
+7.Move file CMD: move a.txt folder PowerShell: Move-Item a.txt folder
+
+Rename file CMD: ren a.txt b.txt PowerShell: Rename-Item a.txt b.txt
+
+================================================== FILE CONTENT & OUTPUT==================================================
+View file content CMD: type file.txt PowerShell: Get-Content file.txt
+
+Print text CMD: echo Hello PowerShell: Write-Output “Hello”
+
+Redirect output CMD: dir > out.txt PowerShell: Get-ChildItem > out.txt
+
+================================================== SYSTEM & PROCESS==================================================
+List processes CMD: tasklist PowerShell: Get-Process
+
+Kill process CMD: taskkill /PID 1234 PowerShell: Stop-Process -Id 1234
+
+System info CMD: systeminfo PowerShell: Get-ComputerInfo
+
+Environment variables CMD: set PowerShell: Get-ChildItem Env:
+
+================================================== NETWORKING ================================================== IP config CMD:
+ipconfig PowerShell: Get-NetIPAddress
+
+Ping CMD: ping google.com PowerShell: Test-Connection google.com
+
+DNS lookup CMD: nslookup google.com PowerShell: Resolve-DnsName google.com
+
+================================================== SCRIPTING ================================================== 
+Loop CMD: for %i in (*) do … PowerShell: foreach ($i in Get-ChildItem) {}
+
+If condition CMD: if exist file.txt (…) PowerShell: if (Test-Path
+file.txt) {}
+
+Variables CMD: set var=value PowerShell: $var = “value”
+
+Read input CMD: set /p var= PowerShell: Read-Host
+
+================================================== DEVOPS REAL-WORLD EXAMPLES ==================================================
+
+1.  AWS SSM - Run command on EC2
+
+CMD: aws ssm send-command –document-name “AWS-RunShellScript” –targets
+Key=tag:Environment,Values=dev –parameters commands=“echo Hello from
+CMD”
+
+PowerShell: aws ssm send-command
+--document-name "AWS-RunPowerShellScript" –targets
+Key=tag:Environment,Values=dev ` –parameters commands=“Write-Output
+‘Hello from PowerShell’”
+
+------------------------------------------------------------------------
+
+2.  Batch Script vs PowerShell Script
+
+CMD (batch file: script.bat): @echo off echo Starting cleanup… del /q
+C:*.log echo Cleanup completed
+
+PowerShell (script.ps1): Write-Output “Starting cleanup…” Remove-Item
+“C:*.log” -Force Write-Output “Cleanup completed”
+
+------------------------------------------------------------------------
+
+3.  Loop through files (log cleanup)
+
+CMD: for %f in (*.log) do del %f
+
+PowerShell: Get-ChildItem *.log | Remove-Item
+
+------------------------------------------------------------------------
+
+4.  Check if service is running
+
+CMD: sc query wuauserv | find “RUNNING”
+
+PowerShell: Get-Service wuauserv | Where-Object {$_.Status -eq “Running”}
+
+------------------------------------------------------------------------
+
+5.  CI/CD (GitHub Actions example snippet)
+
+CMD: echo Building project… mvn clean install
+
+PowerShell: Write-Output “Building project…” mvn clean install
+
+------------------------------------------------------------------------
+
+6.  Environment variable usage in pipeline
+
+CMD: set ENV=dev echo %ENV%
+
+PowerShell: $ENV=“dev” Write-Output $ENV
+
+------------------------------------------------------------------------
+
+7.  Disk cleanup automation
+
+CMD: del /s /q C:*
+
+PowerShell: Get-ChildItem “C:” -Recurse | Remove-Item -Force
+
+------------------------------------------------------------------------
+
+8.  Fetch EC2 metadata (useful in automation)
+
+CMD: curl http://169.254.169.254/latest/meta-data/instance-id
+
+PowerShell: Invoke-RestMethod http://169.254.169.254/latest/meta-data/instance-id
+
+================================================== KEY DIFFERENCES ================================================== 
+CMD: - Simple and older shell - Text-based output - Limited scripting
+
+PowerShell: - Modern and object-oriented - Outputs objects instead of
+plain text - Strong automation and DevOps support
